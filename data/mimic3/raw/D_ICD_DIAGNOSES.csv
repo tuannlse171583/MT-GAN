@@ -1,4 +1,4 @@
-row_id,icd9_code,short_title,long_title
+row_id,ICD9_CODE,short_title,long_title
 1,01716,Erythem nod tb-oth test,"Erythema nodosum with hypersensitivity reaction in tuberculosis, tubercle bacilli not found by bacteriological or histological examination, but tuberculosis confirmed by other methods [inoculation of animals]"
 2,01720,TB periph lymph-unspec,"Tuberculosis of peripheral lymph nodes, unspecified"
 3,01721,TB periph lymph-no exam,"Tuberculosis of peripheral lymph nodes, bacteriological or histological examination not done"
