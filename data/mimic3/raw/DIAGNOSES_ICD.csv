@@ -1,4 +1,4 @@
-row_id,subject_id,hadm_id,seq_num,icd9_code
+row_id,SUBJECT_ID,HADM_ID,seq_num,ICD9_CODE
 112344,10006,142345,1,99591
 112345,10006,142345,2,99662
 112346,10006,142345,3,5672
