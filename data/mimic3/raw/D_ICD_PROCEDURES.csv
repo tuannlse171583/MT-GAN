@@ -1,4 +1,4 @@
-row_id,icd9_code,short_title,long_title
+row_id,ICD9_CODE,short_title,long_title
 1,1423,Chorioret les xenon coag,Destruction of chorioretinal lesion by xenon arc photocoagulation
 2,1424,Chorioret les laser coag,Destruction of chorioretinal lesion by laser photocoagulation
 3,1425,Chorioret les p/coag NOS,Destruction of chorioretinal lesion by photocoagulation of unspecified type
