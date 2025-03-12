@@ -39,31 +39,14 @@ class GRU(nn.Module):
 
 
 class SmoothCondition(nn.Module):
-    def __init__(self, code_num, attention_dim, sigma=1.0):
+    def __init__(self, code_num, attention_dim):
         super().__init__()
         self.attention = MaskedAttention(code_num, attention_dim)
-        self.sigma = sigma  # Tham số điều chỉnh độ rộng của Gaussian Kernel
-
-    def gaussian_kernel(self, x):
-        """
-        Tính ma trận Gaussian Kernel cho dữ liệu đầu vào x.
-        x có shape (batch_size, seq_len, code_num)
-        """
-        x_i = x.unsqueeze(2)  # (batch_size, seq_len, 1, code_num)
-        x_j = x.unsqueeze(1)  # (batch_size, 1, seq_len, code_num)
-        dist = torch.norm(x_i - x_j, dim=-1) ** 2  # Bình phương khoảng cách
-        kernel = torch.exp(-dist / (2 * self.sigma ** 2))  # Áp dụng Gaussian
-        return kernel  # (batch_size, seq_len, seq_len)
 
     def forward(self, x, lens, target_codes):
-        score = self.attention(x, lens)  # (batch_size, seq_len)
-        kernel = self.gaussian_kernel(x)  # (batch_size, seq_len, seq_len)
-
-        # Nhân Kernel với score để tạo ra giá trị điều chỉnh
-        weighted_score = torch.bmm(kernel, score.unsqueeze(-1)).squeeze(-1)
-
+        score = self.attention(x, lens)
         score_tensor = torch.zeros_like(x)
-        score_tensor[torch.arange(len(x)), :, target_codes] = weighted_score
+        score_tensor[torch.arange(len(x)), :, target_codes] = score
         x = x + score_tensor
         x = torch.clip(x, max=1)
         return x
