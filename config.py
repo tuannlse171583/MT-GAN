@@ -28,7 +28,7 @@ def _parse_model_structure_setting(parser):
 def _parse_gan_training_setting(parser):
     group = parser.add_argument_group('gan_training', 'gan training setting')
     group.add_argument('--iteration', default=300000, type=int)
-    group.add_argument('--batch_size', default=256, type=int)
+    group.add_argument('--batch_size', default=128, type=int)
     group.add_argument('--g_iter', default=1, type=int)
     group.add_argument('--g_lr', default=1e-4, type=float)
     group.add_argument('--c_iter', default=1, type=int)
