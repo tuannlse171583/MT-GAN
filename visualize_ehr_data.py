@@ -37,3 +37,41 @@ plt.grid(axis='y', linestyle='--', alpha=0.7)
 plt.tight_layout()
 plt.savefig("admission_distribution_detailed.png")
 plt.show()
+
+# === Biểu đồ 2: Phân bố số lượng bệnh nhân theo số lần nhập viện (hiển thị số cụ thể) ===
+plt.figure(figsize=(10, 5))
+patient_counts = admission_dist * len(lens)
+
+bars = plt.bar(x_ticks, patient_counts, color='skyblue', edgecolor='black')
+plt.xticks(x_ticks)
+plt.xlabel("Số lần nhập viện")
+plt.ylabel("Số bệnh nhân")
+plt.title("Số lượng bệnh nhân theo số lần nhập viện")
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+
+for bar, count in zip(bars, patient_counts):
+    height = bar.get_height()
+    plt.text(bar.get_x() + bar.get_width() / 2, height + 1, f'{int(count)}', ha='center', va='bottom', fontsize=9)
+
+plt.tight_layout()
+plt.savefig("admission_distribution_counts.png")
+plt.show()
+
+# === Biểu đồ 3: Biểu đồ hình tròn đã gom nhóm nhỏ (<1%) thành "Khác" ===
+plt.figure(figsize=(7, 7))
+threshold = 0.01  # 1%
+large_idx = admission_dist >= threshold
+small_idx = ~large_idx
+
+labels_main = [f"{i+1} lần" for i in range(len(admission_dist)) if large_idx[i]]
+sizes_main = admission_dist[large_idx]
+
+if small_idx.any():
+    labels_main.append("Khác")
+    sizes_main = np.append(sizes_main, admission_dist[small_idx].sum())
+
+plt.pie(sizes_main, labels=labels_main, autopct='%1.1f%%', startangle=90, counterclock=False)
+plt.title("Tỷ lệ phần trăm bệnh nhân theo số lần nhập viện (gom nhóm nhỏ)")
+plt.tight_layout()
+plt.savefig("admission_distribution_pie_grouped.png")
+plt.show()
