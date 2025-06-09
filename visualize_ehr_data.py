@@ -2,7 +2,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-from auxiliary import real_data_stat, generate_code_code_adjacent
+from preprocess.auxiliary import real_data_stat, generate_code_code_adjacent
 
 # === Thay đổi phần dưới theo dữ liệu thực tế ===
 # Giả sử bạn đã có sẵn các biến sau từ quá trình xử lý dữ liệu:
